@@ -7,12 +7,39 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { ContactsComponent } from './pages/contacts/contacts.component';
-import { EmployeeComponent } from './pages/employee/employee.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { CompanyListComponent } from './pages/admin/company-list/company-list.component';
+import { CompanyDashboardComponent } from './pages/company/company-dashboard/company-dashboard.component';
+import { EmployeeListComponent } from './pages/company/employee-list/employee-list.component';
+import { DepartmentListComponent } from './pages/company/department-list/department-list.component';
 
 const routes: Routes = [
+  // Company
   {
-    path: 'pages/employee',
-    component: EmployeeComponent,
+    path: 'company/department-list',
+    component: DepartmentListComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'company/employee-list',
+    component: EmployeeListComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'company/company-dashboard',
+    component: CompanyDashboardComponent,
+    canActivate: [ AuthGuardService ]
+  },
+
+  // Admin
+  {
+    path: 'admin/company-list',
+    component: CompanyListComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'admin/admin-dashboard',
+    component: AdminDashboardComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -70,7 +97,11 @@ const routes: Routes = [
     ProfileComponent,
     TasksComponent,
     ContactsComponent,
-    EmployeeComponent
+    AdminDashboardComponent,
+    CompanyListComponent,
+    CompanyDashboardComponent,
+    EmployeeListComponent,
+    DepartmentListComponent
   ]
 })
 export class AppRoutingModule { }
