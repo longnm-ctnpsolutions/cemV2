@@ -1,0 +1,33 @@
+.grid-header {
+  font-size: 2em;
+}
+
+.position {
+  color: #999;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  &-Salaried::before {
+    background-color: green;
+  }
+
+  &-Freelance::before {
+    background-color: red;
+  }
+
+  &-Hourly::before {
+    background-color: lightblue;
+  }
+}

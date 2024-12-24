@@ -1,0 +1,126 @@
+<h2 class="content-block">Contacts</h2>
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="data"
+      [columnAutoWidth]="true"
+      [filterRow]="{ visible: true }"
+      [sorting]="{ mode: 'multiple' }"
+      height="100%"
+      [paging]="{ enabled: true, pageSize: 10 }"
+    >
+      <dxo-load-panel [showPane]="false"></dxo-load-panel>
+      <dxo-selection
+        selectAllMode="allPages"
+        showCheckBoxesMode="always"
+        mode="multiple"
+      ></dxo-selection>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager
+        [visible]="true"
+        [allowedPageSizes]="[5, 10, 20]"
+        [showInfo]="true"
+        [showNavigationButtons]="true"
+        [showPageSizeSelector]="true"
+      ></dxo-pager>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      <dxo-column-chooser [enabled]="true"> </dxo-column-chooser>
+      <dxo-search-panel
+        [visible]="true"
+        placeholder="Contacts Search"
+      ></dxo-search-panel>
+      <dxo-export
+        [enabled]="true"
+        [allowExportSelectedData]="true"
+        [formats]="['xlsx', 'pdf']"
+      ></dxo-export>
+      <dxo-toolbar>
+        <dxi-item location="before">
+          <div class="grid-header">Contacts Grid</div>
+        </dxi-item>
+        <dxi-item
+          location="after"
+          locateInMenu="auto"
+          showText="inMenu"
+          widget="dxButton"
+          [options]="{
+            text: 'Refresh',
+            icon: 'refresh',
+            onClick: refresh,
+            stylingMode: 'text'
+          }"
+        >
+        </dxi-item>
+        <dxi-item location="after" locateInMenu="auto">
+          <div class="separator"></div>
+        </dxi-item>
+        <dxi-item name="exportButton"></dxi-item>
+        <dxi-item location="after" locateInMenu="auto">
+          <div class="separator"></div>
+        </dxi-item>
+        <dxi-item name="columnChooserButton" locateInMenu="auto"></dxi-item>
+        <dxi-item name="searchPanel" locateInMenu="auto"></dxi-item>
+      </dxo-toolbar>
+
+      <dxi-column
+        dataField="name"
+        caption="Name"
+        sortOrder="asc"
+        [hidingPriority]="5"
+        [minWidth]="150"
+        cellTemplate="name"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="company"
+        caption="Company"
+        [hidingPriority]="5"
+        [minWidth]="150"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="status"
+        caption="Status"
+        cellTemplate="cellStatus"
+        editCellTemplate="editCellStatus"
+       [hidingPriority]="3"
+        [minWidth]="100"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="assignedTo"
+        caption="Assigned to"
+        [hidingPriority]="4"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="phone"
+        caption="Phone"
+        [hidingPriority]="2"
+        [customizeText]="customizePhoneCell"
+      >
+      </dxi-column>
+      <dxi-column
+        dataField="email"
+        caption="Email"
+        [hidingPriority]="1"
+      >
+      </dxi-column>
+
+
+      <div *dxTemplate="let cellInfo of 'name'" class="name-template">
+        <div>
+          <div>{{cellInfo.data.name}}</div>
+          <div class="position">{{cellInfo.data.position}}</div>
+        </div>
+      </div>
+
+      <div *dxTemplate="let cellInfo of 'cellStatus'">
+        <span class="status status-{{cellInfo.data.status}}">
+          {{cellInfo.data.status}}
+        </span>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>
